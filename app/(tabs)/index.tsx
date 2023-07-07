@@ -1,8 +1,16 @@
-import { FlatList, StyleSheet, Image } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Button,
+} from "react-native";
 
 import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
+import { Dimensions } from 'react-native';
 // import chatImage1 from '../../assets/images/io2.jpg';
 
 interface Chat {
@@ -17,10 +25,22 @@ const chatData: Chat[] = [
     id: "1",
     name: "Davide Scalone",
     image: "https://www.chedonna.it/wp-content/uploads/2020/01/visage2.jpg",
-    text: "Prova",
+    text: "Sono proprio io",
   },
-  { id: "2", name: "Chat 2", image: "url_to_image_1", text: "Prova" },
-  { id: "3", name: "Chat 3", image: "url_to_image_1", text: "Prova" },
+  {
+    id: "2",
+    name: "Socio d'affari",
+    image:
+      "https://thumbs.dreamstime.com/b/persona-che-pensa-suo-parere-un-altra-idea-avere-qualche-dubbio-viso-barbuto-dell-ippopotamo-non-sicuro-di-colore-giallo-uomo-193661454.jpg",
+    text: "Abbiamo fatto i milioni!!",
+  },
+  {
+    id: "3",
+    name: "Maurizio Calcetto",
+    image:
+      "https://img.freepik.com/premium-photo/portrait-serious-black-man-with-skincare-cosmetics-dermatology-against-grey-studio-background-face-male-person-model-with-beauty-salon-treatment-luxury-with-grooming-routine_590464-173812.jpg",
+    text: "Quando la prossima partita??",
+  },
   // Aggiungi altre chat qui
 ];
 
@@ -31,18 +51,33 @@ function TabBarIcon(props: {
   return <FontAwesome size={18} style={styles.penIcon} {...props} />;
 }
 
-export default function TabOneScreen() {
-  const renderChatItem = ({ item }: { item: Chat }) => (
-    <View style={styles.chatItem}>
-      <View style={styles.imageWrapper}>
-        <Image source={{ uri: item.image }} style={styles.chatImage} />
-      </View>
-      <View style={styles.chatContainer}>
-        <Text style={styles.chatName}>{item.name}</Text>
-        <Text style={styles.chatText}>{item.text}</Text>
-      </View>
+export default function index() {
+  const navigation = useNavigation();
+
+  const ChatItem = ({ item }: { item: Chat }) => (
+    <View style={styles.chatItemWrapper}>
+      <TouchableOpacity
+        style={styles.chatItem}
+        onPress={() => navigation.navigate("Chat" as never)}
+      >
+        <View style={styles.imageWrapper}>
+          <Image source={{ uri: item.image }} style={styles.chatImage} />
+        </View>
+        <View style={styles.chatContainer}>
+          <Text style={styles.chatName}>{item.name}</Text>
+          <Text style={styles.chatText}>{item.text}</Text>
+        </View>
+      </TouchableOpacity>
+      <View
+        style={styles.innerSeparator}
+        lightColor="#eee"
+        darkColor="rgba(255,255,255,0.1)"
+      />
     </View>
   );
+
+  const renderChatItem = ({ item }: { item: Chat }) => <ChatItem item={item} />;
+
   return (
     <View style={styles.container}>
       <View
@@ -88,9 +123,11 @@ export default function TabOneScreen() {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 60,
     flex: 1,
     alignItems: "flex-start",
     justifyContent: "flex-start",
+    width: "100%",
   },
   title: {
     fontSize: 30,
@@ -102,6 +139,12 @@ const styles = StyleSheet.create({
     marginVertical: 2,
     height: 1,
     width: "100%",
+  },
+  innerSeparator: {
+    marginVertical: 4,
+    height: 1,
+    width: Dimensions.get('window').width,
+    marginLeft: 60,
   },
   edit: {
     fontSize: 15,
@@ -132,6 +175,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 10,
+    width: "100%",
   },
   imageWrapper: {
     width: 40,
@@ -155,6 +199,10 @@ const styles = StyleSheet.create({
   },
   chatContainer: {
     flexDirection: "column",
+  },
+  chatItemWrapper: {
+    flex: 1,
+    width: "100%",
   },
   cameraIcon: {
     marginTop: 15,
