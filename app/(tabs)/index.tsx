@@ -2,6 +2,7 @@ import { FlatList, StyleSheet, Image } from "react-native";
 
 import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 // import chatImage1 from '../../assets/images/io2.jpg';
 
 interface Chat {
@@ -23,6 +24,13 @@ const chatData: Chat[] = [
   // Aggiungi altre chat qui
 ];
 
+function TabBarIcon(props: {
+  name: React.ComponentProps<typeof FontAwesome>["name"];
+  color: string;
+}) {
+  return <FontAwesome size={18} style={styles.penIcon} {...props} />;
+}
+
 export default function TabOneScreen() {
   const renderChatItem = ({ item }: { item: Chat }) => (
     <View style={styles.chatItem}>
@@ -30,14 +38,27 @@ export default function TabOneScreen() {
         <Image source={{ uri: item.image }} style={styles.chatImage} />
       </View>
       <View style={styles.chatContainer}>
-      <Text style={styles.chatName}>{item.name}</Text>
-      <Text style={styles.chatText}>{item.text}</Text>
+        <Text style={styles.chatName}>{item.name}</Text>
+        <Text style={styles.chatText}>{item.text}</Text>
       </View>
     </View>
   );
   return (
     <View style={styles.container}>
-      <Text style={styles.edit}>Edit</Text>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          width: "100%",
+        }}
+      >
+        <Text style={styles.edit}>Edit</Text>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <TabBarIcon name="camera" color="#0140dc" />
+          <TabBarIcon name="pencil" color="#0140dc" />
+        </View>
+      </View>
+
       <Text style={styles.title}>Chats</Text>
       <View
         style={{
@@ -85,7 +106,7 @@ const styles = StyleSheet.create({
   edit: {
     fontSize: 15,
     fontWeight: "400",
-    color: "blue",
+    color: "#0140dc",
     textAlign: "left",
     marginTop: 15,
     marginBottom: 15,
@@ -94,7 +115,7 @@ const styles = StyleSheet.create({
   broadcastList: {
     fontSize: 15,
     fontWeight: "400",
-    color: "blue",
+    color: "#0140dc",
     textAlign: "left",
     marginTop: 15,
     marginBottom: 15,
@@ -103,7 +124,7 @@ const styles = StyleSheet.create({
   newGroup: {
     fontSize: 15,
     fontWeight: "400",
-    color: "blue",
+    color: "#0140dc",
     textAlign: "right",
     marginRight: 15,
   },
@@ -132,7 +153,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "normal",
   },
-  chatContainer:{
-    flexDirection: 'column'
-  }
+  chatContainer: {
+    flexDirection: "column",
+  },
+  cameraIcon: {
+    marginTop: 15,
+    marginBottom: 15,
+    marginRight: 15,
+  },
+  penIcon: {
+    marginTop: 15,
+    marginBottom: 15,
+    marginRight: 15,
+  },
 });
