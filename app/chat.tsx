@@ -14,6 +14,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
+  onPress?: () => void;
 }) {
   return <FontAwesome size={18} style={styles.penIcon} {...props} />;
 }
@@ -22,35 +23,46 @@ export default function Chat() {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const chatName = route.params?.chatName?.name || "";
-  const chatImage = route.params?.chatName?.image || "";
+  const chatName = route.params?.chatName?.name || "Non trovato";
+  const chatImage =
+    route.params?.chatName?.image ||
+    "https://images.emojiterra.com/google/android-12l/512px/2753.png";
 
   return (
     <View style={styles.container}>
-      <View style={styles.chatItemWrapper}>
-        <TouchableOpacity
-          style={styles.chatItem}
+  <View style={styles.chatItemWrapper}>
+    <View style={styles.chatItem}>
+      <View style={styles.leftContainer}>
+        <TabBarIcon
+          name="chevron-left"
+          color="#0140dc"
           onPress={() => navigation.goBack()}
-        >
-          <View style={styles.leftContainer}>
-            <TabBarIcon name="chevron-left" color="#0140dc" />
-            <View style={styles.imageWrapper}>
-              <Image source={chatImage} style={styles.chatImage} />
-            </View>
-            <View style={styles.chatContainer}>
-              <Text style={styles.chatName}>{chatName}</Text>
-            </View>
-          </View>
-        </TouchableOpacity>
-
-        <View
-          style={styles.innerSeparator}
-          lightColor="#eee"
-          darkColor="rgba(255,255,255,0.1)"
         />
+        <View style={styles.imageWrapper}>
+          <Image source={chatImage} style={styles.chatImage} />
+        </View>
+        <View style={styles.chatContainer}>
+          <Text style={styles.chatName}>{chatName}</Text>
+          <Text style={styles.chatStatus}>Online</Text>
+        </View>
       </View>
-      {/* <EditScreenInfo path="app/(tabs)/two.tsx" /> */}
+      <View style={styles.rightContainer}>
+        <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
+          <TabBarIcon name="video-camera" color="#0140dc" />
+          <TabBarIcon name="phone" color="#0140dc" />
+        </View>
+      </View>
     </View>
+
+    <View
+      style={styles.innerSeparator}
+      lightColor="#eee"
+      darkColor="rgba(255,255,255,0.1)"
+    />
+  </View>
+  {/* <EditScreenInfo path="app/(tabs)/two.tsx" /> */}
+</View>
+
   );
 }
 
@@ -110,15 +122,24 @@ const styles = StyleSheet.create({
     padding: 10,
     width: "100%",
   },
+  chatStatus: {
+    fontSize: 14,
+    fontWeight: "normal",
+  },
   leftContainer: {
     flexDirection: "row",
     alignItems: "center",
     overflow: "hidden",
   },
+  rightContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+  },  
   penIcon: {
     marginTop: 15,
     marginBottom: 15,
     marginRight: 15,
   },
 });
-
