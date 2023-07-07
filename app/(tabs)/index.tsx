@@ -51,30 +51,41 @@ function TabBarIcon(props: {
   return <FontAwesome size={18} style={styles.penIcon} {...props} />;
 }
 
-export default function index() {
+export default function Index() {
   const navigation = useNavigation();
 
-  const ChatItem = ({ item }: { item: Chat }) => (
-    <View style={styles.chatItemWrapper}>
-      <TouchableOpacity
-        style={styles.chatItem}
-        onPress={() => navigation.navigate("Chat" as never)}
-      >
-        <View style={styles.imageWrapper}>
-          <Image source={{ uri: item.image }} style={styles.chatImage} />
-        </View>
-        <View style={styles.chatContainer}>
-          <Text style={styles.chatName}>{item.name}</Text>
-          <Text style={styles.chatText}>{item.text}</Text>
-        </View>
-      </TouchableOpacity>
-      <View
-        style={styles.innerSeparator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-    </View>
-  );
+  const ChatItem = ({ item }: { item: Chat }) => {
+    const navigation = useNavigation();
+  
+    const onPressChatItem = (chatName: any) => {
+      navigation.navigate("Chat" as never, { chatName } as never);
+    };
+  
+    return (
+      <View style={styles.chatItemWrapper}>
+        <TouchableOpacity
+          style={styles.chatItem}
+          onPress={() => onPressChatItem(item)}
+        >
+          <View style={styles.imageWrapper}>
+            <Image source={{ uri: item.image }} style={styles.chatImage} />
+          </View>
+          <View style={[styles.chatContainer, { flexShrink: 1 }]}>
+            <Text style={styles.chatName}>{item.name}</Text>
+            <Text style={styles.chatText}>{item.text}</Text>
+          </View>
+        </TouchableOpacity>
+        <View
+          style={styles.innerSeparator}
+          lightColor="#eee"
+          darkColor="rgba(255,255,255,0.1)"
+        />
+      </View>
+    );
+  };
+  
+  
+  
 
   const renderChatItem = ({ item }: { item: Chat }) => <ChatItem item={item} />;
 
@@ -199,6 +210,7 @@ const styles = StyleSheet.create({
   },
   chatContainer: {
     flexDirection: "column",
+    flexShrink: 1,
   },
   chatItemWrapper: {
     flex: 1,
