@@ -54,7 +54,7 @@ function RootLayoutNav() {
     <>
       <NavigationContainer independent={true}>
         <Tab.Navigator initialRouteName="Chats" screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
+          tabBarIcon: ({ color, size }) => {
             let iconName;
 
             if (route.name === 'Chats') {
