@@ -12,6 +12,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 import { Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
 // import chatImage1 from '../../assets/images/io2.jpg';
 
 interface Chat {
@@ -57,7 +58,7 @@ export default function Index() {
     const navigation = useNavigation();
 
     const onPressChatItem = (chatData: any) => {
-      navigation.navigate("ChatScreen" as never, {chatData});
+      navigation.navigate("ChatScreen" as never, { chatData });
     };
 
     return (
@@ -83,6 +84,12 @@ export default function Index() {
     );
   };
 
+  const [editMode, setEditMode] = useState(false);
+
+  function editModes() {
+    setEditMode(!editMode);
+  }
+
   const renderChatItem = ({ item }: { item: Chat }) => <ChatItem item={item} />;
   return (
     <View style={styles.container}>
@@ -93,11 +100,27 @@ export default function Index() {
           width: "100%",
         }}
       >
-        <Text style={styles.edit}>Edit</Text>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <TabBarIcon name="camera" color="#0140dc" />
-          <TabBarIcon name="pencil" color="#0140dc" />
-        </View>
+        {editMode ? (
+          <TouchableOpacity onPress={editModes}>
+            <Text style={styles.edit}>Done</Text>
+          </TouchableOpacity>
+        ) : (
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            <TouchableOpacity onPress={editModes}>
+              <Text style={styles.edit}>Edit</Text>
+            </TouchableOpacity>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <TabBarIcon name="camera" color="#0140dc" />
+              <TabBarIcon name="pencil" color="#0140dc" />
+            </View>
+          </View>
+        )}
       </View>
 
       <Text style={styles.title}>Chats</Text>
