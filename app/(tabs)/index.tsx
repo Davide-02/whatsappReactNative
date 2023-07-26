@@ -56,8 +56,8 @@ export default function Index() {
   const ChatItem = ({ item }: { item: Chat }) => {
     const navigation = useNavigation();
 
-    const onPressChatItem = (chatName: any) => {
-      navigation.navigate("ChatScreen" as never, chatName as never);
+    const onPressChatItem = (chatData: any) => {
+      navigation.navigate("ChatScreen" as never, {chatData});
     };
 
     return (

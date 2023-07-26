@@ -11,7 +11,7 @@ import {
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useState } from "react";
 import * as Animatable from "react-native-animatable";
@@ -32,13 +32,20 @@ function TextIcon(props: {
   return <FontAwesome size={18} style={styles.textIcon} {...props} />;
 }
 
-export default function Chat() {
-  const navigation = useNavigation();
-  const route = useRoute();
+type ChatScreenParams = {
+  chatData: any;
+};
 
-  const chatName = route.params?.chatName?.name || "Non trovato";
+type ChatScreenProps = {
+  route: RouteProp<Record<any, ChatScreenParams>, "ChatScreen">;
+};
+
+export default function Chat({ route }: ChatScreenProps) {
+  const navigation = useNavigation();
+  const { chatData } = route.params;
+  const chatName = chatData.name || "Non trovato";
   const chatImage =
-    route.params?.chatName?.image ||
+    chatData.image ||
     "https://images.emojiterra.com/google/android-12l/512px/2753.png";
 
   const [hideCameraButton, setHideCameraButton] = useState(false);
@@ -386,7 +393,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
-  cancelText:{
+  cancelText: {
     justifyContent: "center",
-  }
+  },
 });
