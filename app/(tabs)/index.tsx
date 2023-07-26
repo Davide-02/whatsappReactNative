@@ -10,7 +10,8 @@ import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
-import { Dimensions } from 'react-native';
+import { Dimensions } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 // import chatImage1 from '../../assets/images/io2.jpg';
 
 interface Chat {
@@ -52,15 +53,13 @@ function TabBarIcon(props: {
 }
 
 export default function Index() {
-  const navigation = useNavigation();
-
   const ChatItem = ({ item }: { item: Chat }) => {
     const navigation = useNavigation();
-  
+
     const onPressChatItem = (chatName: any) => {
       navigation.navigate("Chat" as never, { chatName } as never);
     };
-  
+
     return (
       <View style={styles.chatItemWrapper}>
         <TouchableOpacity
@@ -83,12 +82,8 @@ export default function Index() {
       </View>
     );
   };
-  
-  
-  
 
   const renderChatItem = ({ item }: { item: Chat }) => <ChatItem item={item} />;
-
   return (
     <View style={styles.container}>
       <View
@@ -140,6 +135,18 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     width: "100%",
   },
+  navigationBar: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  iconContainer: {
+    flex: 1,
+    alignItems: "center",
+  },
   title: {
     fontSize: 30,
     fontWeight: "bold",
@@ -154,7 +161,7 @@ const styles = StyleSheet.create({
   innerSeparator: {
     marginVertical: 4,
     height: 1,
-    width: Dimensions.get('window').width,
+    width: Dimensions.get("window").width,
     marginLeft: 60,
   },
   edit: {

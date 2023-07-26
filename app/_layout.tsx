@@ -8,10 +8,14 @@ import {
 import { useFonts } from "expo-font";
 import { SplashScreen } from "expo-router";
 import { useEffect } from "react";
-import { useColorScheme } from "react-native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../app/(tabs)/index";
 import ChatScreen from "../app/chat";
+import SettingsScreen from "../app/settings";
+import StoriesScreen from "../app/stories";
+import { createStackNavigator } from "@react-navigation/stack";
+import { Ionicons } from "@expo/vector-icons";
+
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -41,23 +45,49 @@ export default function RootLayout() {
     </>
   );
 }
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
+
+const Tab = createBottomTabNavigator();
+
 function RootLayoutNav() {
   return (
     <>
       <NavigationContainer independent={true}>
-        <Stack.Navigator initialRouteName="Index">
-          <Stack.Screen
-            name="Index"
+        <Tab.Navigator initialRouteName="Chats" screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'Chats') {
+              iconName = 'chatbubbles-outline';
+                
+            } else if (route.name === 'Settings') {
+              iconName = 'cog-outline';
+            }else if (route.name === 'Status') {
+              iconName = 'disc-outline';
+            }
+
+            // You can return any component that you like here!
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: '#0140dc',
+          tabBarInactiveTintColor: 'gray',
+        })}>
+          <Tab.Screen
+            name="Status"
+            component={StoriesScreen}
+            options={{ headerShown: false }}
+          />
+          <Tab.Screen
+            name="Chats"
             component={HomeScreen}
             options={{ headerShown: false }}
           />
-          <Stack.Screen
-            name="Chat"
-            component={ChatScreen}
+          <Tab.Screen
+            name="Settings"
+            component={SettingsScreen}
             options={{ headerShown: false }}
           />
-        </Stack.Navigator>
+        </Tab.Navigator>
       </NavigationContainer>
     </>
   );
