@@ -45,33 +45,51 @@ export default function RootLayout() {
     </>
   );
 }
+
 const Stack = createStackNavigator();
 
+const FirstScreenNavigator = () =>{
+    return(
+        <Stack.Navigator>
+          <Stack.Screen 
+            name="HomeScreen"
+            component={HomeScreen}
+            options={{ headerShown: false }}
+            />
+            <Stack.Screen 
+            name="ChatScreen"
+            component={ChatScreen}
+            options={{ headerShown: false }}
+            />
+        </Stack.Navigator>
+    )
+}
 const Tab = createBottomTabNavigator();
 
 function RootLayoutNav() {
   return (
     <>
       <NavigationContainer independent={true}>
-        <Tab.Navigator initialRouteName="Chats" screenOptions={({ route }) => ({
-          tabBarIcon: ({ color, size }) => {
-            let iconName;
+        <Tab.Navigator
+          initialRouteName="Chats"
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ color, size }) => {
+              let iconName;
 
-            if (route.name === 'Chats') {
-              iconName = 'chatbubbles-outline';
-                
-            } else if (route.name === 'Settings') {
-              iconName = 'cog-outline';
-            }else if (route.name === 'Status') {
-              iconName = 'disc-outline';
-            }
+              if (route.name === "Chats") {
+                iconName = "chatbubbles-outline";
+              } else if (route.name === "Settings") {
+                iconName = "cog-outline";
+              } else if (route.name === "Status") {
+                iconName = "disc-outline";
+              }
 
-            // You can return any component that you like here!
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: '#0140dc',
-          tabBarInactiveTintColor: 'gray',
-        })}>
+              return <Ionicons name={iconName} size={size} color={color} />;
+            },
+            tabBarActiveTintColor: "#0140dc",
+            tabBarInactiveTintColor: "gray",
+          })}
+        >
           <Tab.Screen
             name="Status"
             component={StoriesScreen}
@@ -79,7 +97,7 @@ function RootLayoutNav() {
           />
           <Tab.Screen
             name="Chats"
-            component={HomeScreen}
+            component={FirstScreenNavigator}
             options={{ headerShown: false }}
           />
           <Tab.Screen

@@ -125,7 +125,7 @@ export default function Chat() {
             <TabBarIcon
               name="chevron-left"
               color="#0140dc"
-              onPress={() => navigation.goBack()}
+              onPress={() => navigation.navigate("HomeScreen" as never)}
             />
             <View style={styles.imageWrapper}>
               <Image source={chatImage} style={styles.chatImage} />

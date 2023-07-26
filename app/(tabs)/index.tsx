@@ -57,7 +57,7 @@ export default function Index() {
     const navigation = useNavigation();
 
     const onPressChatItem = (chatName: any) => {
-      navigation.navigate("Chat" as never, { chatName } as never);
+      navigation.navigate("ChatScreen" as never, chatName as never);
     };
 
     return (
