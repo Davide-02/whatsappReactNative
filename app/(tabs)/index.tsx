@@ -6,6 +6,7 @@ import {
   Button,
 } from "react-native";
 
+import { RadioButton } from "react-native-paper";
 import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -60,26 +61,66 @@ export default function Index() {
     const onPressChatItem = (chatData: any) => {
       navigation.navigate("ChatScreen" as never, { chatData });
     };
+    const [checked, setChecked] = useState(false);
 
     return (
       <View style={styles.chatItemWrapper}>
-        <TouchableOpacity
-          style={styles.chatItem}
-          onPress={() => onPressChatItem(item)}
-        >
-          <View style={styles.imageWrapper}>
-            <Image source={{ uri: item.image }} style={styles.chatImage} />
+        {editMode ? (
+          <View style={styles.chatItemWrapperEdit}>
+            <View
+              style={{
+                marginLeft: 15,
+                alignItems: "center",
+                flexDirection: "row",
+              }}
+            >
+              <RadioButton
+                value="first"
+                color="blue"
+                status={checked ? "checked" : "unchecked"}
+                onPress={() => setChecked(!checked)}
+              />
+              <TouchableOpacity style={[styles.chatItem, { marginLeft: 15 }]}>
+                <View style={styles.imageWrapper}>
+                  <Image
+                    source={{ uri: item.image }}
+                    style={styles.chatImage}
+                  />
+                </View>
+                <View style={[styles.chatContainer, { flexShrink: 1 }]}>
+                  <Text style={styles.chatName}>{item.name}</Text>
+                  <Text style={styles.chatText}>{item.text}</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+            <View
+              style={styles.innerSeparator}
+              lightColor="#eee"
+              darkColor="rgba(255,255,255,0.1)"
+            />
           </View>
-          <View style={[styles.chatContainer, { flexShrink: 1 }]}>
-            <Text style={styles.chatName}>{item.name}</Text>
-            <Text style={styles.chatText}>{item.text}</Text>
+        ) : (
+          <View style={styles.chatItemWrapper}>
+            <TouchableOpacity
+              style={styles.chatItem}
+              onPress={() => onPressChatItem(item)}
+            >
+              <View style={styles.imageWrapper}>
+                <Image source={{ uri: item.image }} style={styles.chatImage} />
+              </View>
+              <View style={[styles.chatContainer, { flexShrink: 1 }]}>
+                <Text style={styles.chatName}>{item.name}</Text>
+                <Text style={styles.chatText}>{item.text}</Text>
+              </View>
+            </TouchableOpacity>
+            <View
+              style={styles.innerSeparator}
+              lightColor="#eee"
+              darkColor="rgba(255,255,255,0.1)"
+            />
           </View>
-        </TouchableOpacity>
-        <View
-          style={styles.innerSeparator}
-          lightColor="#eee"
-          darkColor="rgba(255,255,255,0.1)"
-        />
+        )}
       </View>
     );
   };
@@ -244,6 +285,12 @@ const styles = StyleSheet.create({
   },
   chatItemWrapper: {
     flex: 1,
+    width: "100%",
+  },
+  chatItemWrapperEdit: {
+    display: "flex",
+    justifyContent: "space-between",
+    flexDirection: "row",
     width: "100%",
   },
   cameraIcon: {
