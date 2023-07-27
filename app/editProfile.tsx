@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, Image } from "react-native";
+import { View, StyleSheet, Text, Image, TextInput } from "react-native";
 import { TabSeparator } from "../components/TabSeparator";
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -44,9 +44,10 @@ export default function EditProfile() {
         </View>
         <View style={{ marginLeft: "4%", marginTop: "4%" }}>
           <TabSeparator />
-          <Text style={{ fontSize: 16, marginTop: 10, marginBottom: 10 }}>
-            Davide
-          </Text>
+          <TextInput
+            defaultValue={"Davide"}
+            style={{ fontSize: 16, marginTop: 10, marginBottom: 10 }}
+          ></TextInput>
           <TabSeparator />
         </View>
       </View>
@@ -65,7 +66,10 @@ export default function EditProfile() {
         </Text>
         <View style={styles.phoneSubContainer}>
           <View style={{ margin: "3%" }}>
-            <Text style={{ fontSize: 15, color: "black" }}>+39 3342048806</Text>
+            <TextInput
+              defaultValue={"+39 3342048806"}
+              style={{ fontSize: 15, color: "black" }}
+            ></TextInput>
           </View>
         </View>
       </View>
@@ -86,13 +90,12 @@ export default function EditProfile() {
             style={{
               display: "flex",
               justifyContent: "space-between",
-              flexDirection:"row",
+              flexDirection: "row",
               paddingLeft: 18,
-
             }}
           >
-            <View style={{alignSelf:"center"}}>
-              <Text style={{ fontSize: 15, color: "black"}}>Stato</Text>
+            <View style={{ alignSelf: "center" }}>
+              <Text style={{ fontSize: 15, color: "black" }}>Stato</Text>
             </View>
             <View>
               <TabBarIcon name="chevron-right" color="gray" />
@@ -105,14 +108,18 @@ export default function EditProfile() {
 }
 
 const styles = StyleSheet.create({
-  macroContainer: { height: "100%", backgroundColor: "lightgray", width: "100%" },
+  macroContainer: {
+    height: "100%",
+    backgroundColor: "lightgray",
+    width: "100%",
+  },
   container: {
     width: "90%",
     height: "22%",
     backgroundColor: "white",
     borderRadius: 10,
     alignSelf: "center",
-    marginTop:"5%"
+    marginTop: "5%",
   },
   subContainer: {
     display: "flex",
