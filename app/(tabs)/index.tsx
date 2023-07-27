@@ -148,6 +148,7 @@ export default function Index() {
   const [editMode, setEditMode] = useState(false);
 
   function editModes() {
+    setSelectedChatList([])
     setEditMode(!editMode);
   }
 
