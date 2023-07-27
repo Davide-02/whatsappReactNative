@@ -13,7 +13,8 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 import { Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import EditBottomBar from "../../components/EditBottomBar";
 // import chatImage1 from '../../assets/images/io2.jpg';
 
 interface Chat {
@@ -23,7 +24,7 @@ interface Chat {
   text: string;
 }
 
-const chatData: Chat[] = [
+const chatData: any[] = [
   {
     id: "1",
     name: "Davide Scalone",
@@ -55,13 +56,32 @@ function TabBarIcon(props: {
 }
 
 export default function Index() {
+  const [selectedChatList, setSelectedChatList] = useState<any[]>([]);
+
+  function selectedChat(chatData: any) {
+    setSelectedChatList((prevList) => {
+      // Controlla se l'ID della chat è già presente nell'array
+      const chatIndex = prevList.findIndex((chat) => chat.id === chatData.id);
+
+      if (chatIndex !== -1) {
+        // Se l'ID è già presente, rimuovi la chat dall'array
+        const newList = [...prevList];
+        newList.splice(chatIndex, 1);
+        return newList;
+      } else {
+        // Se l'ID non è presente, aggiungi la chat all'array
+        return [...prevList, chatData];
+      }
+    });
+  }
+
   const ChatItem = ({ item }: { item: Chat }) => {
     const navigation = useNavigation();
 
     const onPressChatItem = (chatData: any) => {
       navigation.navigate("ChatScreen" as never, { chatData });
     };
-    const [checked, setChecked] = useState(false);
+    const isChecked = selectedChatList.some((chat) => chat.id === item.id);
 
     return (
       <View style={styles.chatItemWrapper}>
@@ -75,10 +95,10 @@ export default function Index() {
               }}
             >
               <RadioButton
-                value="first"
+                value={item.id}
                 color="blue"
-                status={checked ? "checked" : "unchecked"}
-                onPress={() => setChecked(!checked)}
+                status={isChecked ? "checked" : "unchecked"}
+                onPress={() => selectedChat(item)}
               />
               <TouchableOpacity style={[styles.chatItem, { marginLeft: 15 }]}>
                 <View style={styles.imageWrapper}>
@@ -173,8 +193,22 @@ export default function Index() {
           width: "100%",
         }}
       >
-        <Text style={styles.broadcastList}>Broadcast Lists</Text>
-        <Text style={styles.newGroup}>New Group</Text>
+        <Text
+          style={
+            editMode
+              ? [styles.broadcastList, { color: "gray" }]
+              : styles.broadcastList
+          }
+        >
+          Broadcast Lists
+        </Text>
+        <Text
+          style={
+            editMode ? [styles.newGroup, { color: "gray" }] : styles.newGroup
+          }
+        >
+          New Group
+        </Text>
       </View>
       <View
         style={styles.separator}
@@ -186,7 +220,11 @@ export default function Index() {
         renderItem={renderChatItem}
         keyExtractor={(item) => item.id}
       />
-      {/* <EditScreenInfo path="app/(tabs)/index.tsx" /> */}
+      {editMode ? (
+        <View style={{ width: "100%" }}>
+          <EditBottomBar disabled={selectedChatList.length > 0} />
+        </View>
+      ) : null}
     </View>
   );
 }
