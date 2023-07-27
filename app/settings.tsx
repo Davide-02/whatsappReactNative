@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { TabSeparator } from "../components/TabSeparator";
+import { useNavigation } from "expo-router";
 
 export default function Settings() {
   function TabBarIcon(props: {
@@ -18,11 +19,16 @@ export default function Settings() {
   }) {
     return <FontAwesome size={12} style={styles.penIcon} {...props} />;
   }
+  const navigation = useNavigation();
+
+  const onPressEditProfile = () => {
+    navigation.navigate("Edit Profile" as never);
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.sectionTitle}>Settings</Text>
       <View style={styles.chatItemWrapper}>
-        <TouchableOpacity style={styles.chatItem}>
+        <TouchableOpacity style={styles.chatItem} onPress={onPressEditProfile}>
           <View style={styles.imageWrapper}>
             <Image
               source={{

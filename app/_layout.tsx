@@ -15,6 +15,7 @@ import SettingsScreen from "../app/settings";
 import StoriesScreen from "../app/stories";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons } from "@expo/vector-icons";
+import EditProfileScreen from './editProfile';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -48,7 +49,7 @@ export default function RootLayout() {
 
 const Stack = createStackNavigator();
 
-const FirstScreenNavigator = () =>{
+const stackScreens = () =>{
     return(
         <Stack.Navigator>
           <Stack.Screen 
@@ -64,9 +65,27 @@ const FirstScreenNavigator = () =>{
         </Stack.Navigator>
     )
 }
+
+const settingsStackScreens = () =>{
+  return(
+      <Stack.Navigator>
+        <Stack.Screen 
+          name="SettingScreen"
+          component={SettingsScreen}
+          options={{ headerShown: false }}
+          />
+          <Stack.Screen 
+          name="Edit Profile"
+          component={EditProfileScreen}
+          options={{ headerBackTitleStyle:{ alignItems: 'center', justifyContent: 'center'}}}
+          />
+      </Stack.Navigator>
+  )
+}
+
 const Tab = createBottomTabNavigator();
 
-function RootLayoutNav() {
+function RootLayoutNav() { 
   return (
     <>
       <NavigationContainer independent={true}>
@@ -97,12 +116,12 @@ function RootLayoutNav() {
           />
           <Tab.Screen
             name="Chats"
-            component={FirstScreenNavigator}
+            component={stackScreens}
             options={{ headerShown: false }}
           />
           <Tab.Screen
             name="Settings"
-            component={SettingsScreen}
+            component={settingsStackScreens}
             options={{ headerShown: false }}
           />
         </Tab.Navigator>
