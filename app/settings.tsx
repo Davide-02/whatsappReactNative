@@ -27,7 +27,7 @@ export default function Settings() {
   return (
     <View style={styles.container}>
       <Text style={styles.sectionTitle}>Settings</Text>
-      <View style={styles.chatItemWrapper}>
+      <View style={styles.sectionContainer}>
         <TouchableOpacity style={styles.chatItem} onPress={onPressEditProfile}>
           <View style={styles.imageWrapper}>
             <Image
@@ -37,161 +37,119 @@ export default function Settings() {
               style={styles.chatImage}
             />
           </View>
-          <View style={[styles.chatContainer, { flexShrink: 1 }]}>
+          <View style={styles.chatContainer}>
             <Text style={styles.chatName}>Davide</Text>
             <Text style={styles.chatText}>Descrizione</Text>
           </View>
         </TouchableOpacity>
+        <TabSeparator />
+        <TouchableOpacity style={styles.optionContainer}>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Ionicons name="people-circle" size={24} color="blue" />
+            <Text style={styles.optionText}>Avatar</Text>
+          </View>
+
+          <TabBarIcon name="chevron-right" color="grey" />
+        </TouchableOpacity>
       </View>
-      <TabSeparator />
-      <TouchableOpacity
-        style={[
-          styles.optionContainer,
-          { display: "flex", justifyContent: "space-between" },
-        ]}
-      >
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <Ionicons name="people-circle" size={24} color="blue" />
-          <Text style={styles.optionText}>Avatar</Text>
-        </View>
 
-        <TabBarIcon name="chevron-right" color="grey" />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={{ padding: 20, backgroundColor: "#D2D2D2" }}
-      ></TouchableOpacity>
-      <TabSeparator />
-      <TouchableOpacity
-        style={[
-          styles.optionContainer,
-          { display: "flex", justifyContent: "space-between" },
-        ]}
-      >
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <Ionicons name="star" size={24} color="yellow" />
-          <Text style={styles.optionText}>Starred Messages</Text>
-        </View>
+      <View style={styles.sectionContainer}>
+        <TouchableOpacity
+          style={{ padding: 20, backgroundColor: "#D2D2D2" }}
+        ></TouchableOpacity>
+        <TabSeparator />
+        <TouchableOpacity style={styles.optionContainer}>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Ionicons name="star" size={24} color="yellow" />
+            <Text style={styles.optionText}>Starred Messages</Text>
+          </View>
 
-        <TabBarIcon name="chevron-right" color="grey" />
-      </TouchableOpacity>
-      <TabSeparator />
-      <TouchableOpacity
-        style={[
-          styles.optionContainer,
-          { display: "flex", justifyContent: "space-between" },
-        ]}
-      >
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <Ionicons name="logo-chrome" size={24} color="green" />
-          <Text style={styles.optionText}>Linked Devices</Text>
-        </View>
+          <TabBarIcon name="chevron-right" color="grey" />
+        </TouchableOpacity>
 
-        <TabBarIcon name="chevron-right" color="grey" />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={{ padding: 20, backgroundColor: "#D2D2D2" }}
-      ></TouchableOpacity>
-      <TabSeparator />
-      <TouchableOpacity
-        style={[
-          styles.optionContainer,
-          { display: "flex", justifyContent: "space-between" },
-        ]}
-      >
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <Ionicons name="ios-key" size={24} color="blue" />
-          <Text style={styles.optionText}>Account</Text>
-        </View>
+        <TabSeparator />
 
-        <TabBarIcon name="chevron-right" color="grey" />
-      </TouchableOpacity>
-      <TabSeparator />
-      <TouchableOpacity
-        style={[
-          styles.optionContainer,
-          { display: "flex", justifyContent: "space-between" },
-        ]}
-      >
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <Ionicons name="ios-lock-closed" size={24} color="#007fff" />
-          <Text style={styles.optionText}>Privacy</Text>
-        </View>
+        <TouchableOpacity style={styles.optionContainer}>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Ionicons name="logo-chrome" size={24} color="green" />
+            <Text style={styles.optionText}>Linked Devices</Text>
+          </View>
 
-        <TabBarIcon name="chevron-right" color="grey" />
-      </TouchableOpacity>
-      <TabSeparator />
-      <TouchableOpacity
-        style={[
-          styles.optionContainer,
-          { display: "flex", justifyContent: "space-between" },
-        ]}
-      >
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <Ionicons name="ios-logo-whatsapp" size={24} color="green" />
-          <Text style={styles.optionText}>Chats</Text>
-        </View>
+          <TabBarIcon name="chevron-right" color="grey" />
+        </TouchableOpacity>
 
-        <TabBarIcon name="chevron-right" color="grey" />
-      </TouchableOpacity>
-      <TabSeparator />
-      <TouchableOpacity
-        style={[
-          styles.optionContainer,
-          { display: "flex", justifyContent: "space-between" },
-        ]}
-      >
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <Ionicons name="ios-notifications" size={24} color="red" />
-          <Text style={styles.optionText}>Notifications</Text>
-        </View>
+        <TouchableOpacity
+          style={{ padding: 20, backgroundColor: "#D2D2D2" }}
+        ></TouchableOpacity>
+        <TabSeparator />
+        <TouchableOpacity style={styles.optionContainer}>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Ionicons name="ios-key" size={24} color="blue" />
+            <Text style={styles.optionText}>Account</Text>
+          </View>
 
-        <TabBarIcon name="chevron-right" color="grey" />
-      </TouchableOpacity>
-      <TabSeparator />
-      <TouchableOpacity
-        style={[
-          styles.optionContainer,
-          { display: "flex", justifyContent: "space-between" },
-        ]}
-      >
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <Ionicons name="ios-swap-vertical" size={24} color="green" />
-          <Text style={styles.optionText}>Storage and Data</Text>
-        </View>
+          <TabBarIcon name="chevron-right" color="grey" />
+        </TouchableOpacity>
+        <TabSeparator />
+        <TouchableOpacity style={styles.optionContainer}>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Ionicons name="ios-lock-closed" size={24} color="#007fff" />
+            <Text style={styles.optionText}>Privacy</Text>
+          </View>
 
-        <TabBarIcon name="chevron-right" color="grey" />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={{ padding: 20, backgroundColor: "#D2D2D2" }}
-      ></TouchableOpacity>
-      <TabSeparator />
-      <TouchableOpacity
-        style={[
-          styles.optionContainer,
-          { display: "flex", justifyContent: "space-between" },
-        ]}
-      >
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <Ionicons name="ios-help-circle-outline" size={24} color="blue" />
-          <Text style={styles.optionText}>Help</Text>
-        </View>
+          <TabBarIcon name="chevron-right" color="grey" />
+        </TouchableOpacity>
+        <TabSeparator />
+        <TouchableOpacity style={styles.optionContainer}>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Ionicons name="ios-logo-whatsapp" size={24} color="green" />
+            <Text style={styles.optionText}>Chats</Text>
+          </View>
 
-        <TabBarIcon name="chevron-right" color="grey" />
-      </TouchableOpacity>
-      <TabSeparator />
-      <TouchableOpacity
-        style={[
-          styles.optionContainer,
-          { display: "flex", justifyContent: "space-between" },
-        ]}
-      >
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <Ionicons name="heart" size={24} color="red" />
-          <Text style={styles.optionText}>Tell a Friend</Text>
-        </View>
+          <TabBarIcon name="chevron-right" color="grey" />
+        </TouchableOpacity>
+        <TabSeparator />
+        <TouchableOpacity style={styles.optionContainer}>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Ionicons name="ios-notifications" size={24} color="red" />
+            <Text style={styles.optionText}>Notifications</Text>
+          </View>
 
-        <TabBarIcon name="chevron-right" color="grey" />
-      </TouchableOpacity>
+          <TabBarIcon name="chevron-right" color="grey" />
+        </TouchableOpacity>
+        <TabSeparator />
+        <TouchableOpacity style={styles.optionContainer}>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Ionicons name="ios-swap-vertical" size={24} color="green" />
+            <Text style={styles.optionText}>Storage and Data</Text>
+          </View>
+          <TabBarIcon name="chevron-right" color="grey" />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.sectionContainer}>
+        <TouchableOpacity
+          style={{ padding: 20, backgroundColor: "#D2D2D2" }}
+        ></TouchableOpacity>
+        <TabSeparator />
+        <TouchableOpacity style={styles.optionContainer}>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Ionicons name="ios-help-circle-outline" size={24} color="blue" />
+            <Text style={styles.optionText}>Help</Text>
+          </View>
+
+          <TabBarIcon name="chevron-right" color="grey" />
+        </TouchableOpacity>
+        <TabSeparator />
+        <TouchableOpacity style={styles.optionContainer}>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Ionicons name="heart" size={24} color="red" />
+            <Text style={styles.optionText}>Tell a Friend</Text>
+          </View>
+
+          <TabBarIcon name="chevron-right" color="grey" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -215,6 +173,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
+    display: "flex",
+    justifyContent: "space-between",
   },
   optionText: {
     marginLeft: 16,
@@ -222,6 +182,11 @@ const styles = StyleSheet.create({
   },
   chatItemWrapper: {
     width: "100%",
+  },
+  sectionContainer: {
+    width: "90%",
+    backgroundColor: "white",
+    alignSelf: "center",
   },
   chatItem: {
     backgroundColor: "white",

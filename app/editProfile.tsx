@@ -32,7 +32,7 @@ export default function EditProfile() {
                   color: "#0140dc",
                 }}
               >
-                Edit{" "}
+                Edit
               </Text>
             </View>
           </View>
