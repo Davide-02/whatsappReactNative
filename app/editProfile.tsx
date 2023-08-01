@@ -17,12 +17,11 @@ export default function EditProfile() {
         <View style={styles.subContainer}>
           <View>
             <View style={styles.imageWrapper}>
-              <img
-                style={styles.chatImage}
-                src={
-                  "https://www.chedonna.it/wp-content/uploads/2020/01/visage2.jpg"
-                }
-              />
+              <Image
+              source={
+                "https://www.chedonna.it/wp-content/uploads/2020/01/visage2.jpg"
+              }
+            ></Image>
             </View>
             <View>
               <Text

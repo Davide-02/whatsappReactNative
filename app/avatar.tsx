@@ -16,11 +16,11 @@ export default function Avatar() {
       <View style={styles.container}>
         <View style={styles.subContainer}>
           <View style={{width:"80%", justifyContent:"center"}}>
-            <img
-              src={
+            <Image
+              source={
                 "https://i0.wp.com/fthghana.net/wp-content/uploads/2022/12/whatsapp-avatar-delete.jpeg?fit=1024%2C576&ssl=1"
               }
-            ></img>
+            ></Image>
           </View>
         </View>
         <View style={{ marginLeft: "4%", marginTop: "4%" }}>
