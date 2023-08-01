@@ -24,6 +24,9 @@ export default function Settings() {
   const onPressEditProfile = () => {
     navigation.navigate("Edit Profile" as never);
   };
+  const onPressAvatar = () => {
+    navigation.navigate("Avatar" as never);
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.sectionTitle}>Settings</Text>
@@ -43,7 +46,7 @@ export default function Settings() {
           </View>
         </TouchableOpacity>
         <TabSeparator />
-        <TouchableOpacity style={styles.optionContainer}>
+        <TouchableOpacity style={styles.optionContainer}  onPress={onPressAvatar}>
           <View style={{ display: "flex", flexDirection: "row" }}>
             <Ionicons name="people-circle" size={24} color="blue" />
             <Text style={styles.optionText}>Avatar</Text>

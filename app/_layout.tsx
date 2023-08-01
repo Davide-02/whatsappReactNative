@@ -11,6 +11,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../app/(tabs)/index";
 import ChatScreen from "../app/chat";
 import SettingsScreen from "../app/settings";
+import AvatarScreen from "../app/avatar";
 import StoriesScreen from "../app/stories";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons } from "@expo/vector-icons";
@@ -76,7 +77,10 @@ const settingsStackScreens = () =>{
           <Stack.Screen 
           name="Edit Profile"
           component={EditProfileScreen}
-          options={{ headerBackTitleStyle:{ alignItems: 'center', justifyContent: 'center'}}}
+          />
+          <Stack.Screen 
+          name="Avatar"
+          component={AvatarScreen}
           />
       </Stack.Navigator>
   )
